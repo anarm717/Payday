@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+
+
+build_docker_image:
+    stage: build
+    script:
+        - docker build -t account_service .
+    tags:
+        - stage
+    only:
+        - master
+
+deploy_stage:
+    stage: deploy
+    script:
+        - docker stop account_service || true && docker rm account_service || true
+        - docker container run --name account_service -p 8080:8080 -itd account_service bash -c "sh ./var/account_service/startup.sh & sleep 5 && tail -F /dev/null"
+    tags:
+        - stage
+    only:
+        - master
