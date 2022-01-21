@@ -123,7 +123,7 @@ public class PortfolioService {
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
-                return ResponseEntity.ok(2);
+                throw new NotEnoughException(Reason.NOT_ENOUGH_AMOUNT.getValue());
             }
         } else {
             double amount = order.getQuantity()
