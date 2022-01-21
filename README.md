@@ -29,3 +29,5 @@ Eyni zamanda son 2 ayın alma və satma əməliyyatlarının  hesabatına da bax
 
 Nümunə üçün account-service dockerize edilib. Bütün servislərə eynisini tətbiq edə bilərik. Dockerize bir neçə variantla edə bilərdim. Build olunmuş jar versiyanı containerə atıb elə də edə bilərdim (nümunə üçün bu variantı da Dockerfile2 əlavə etdim) ancaq mən fərqli variantla etdim ki, jar build etməmiş də dockerize olacaq.
 Həmçinin sadə .gitlab-ci.yml faylında CI/CD əlavə etdim proyekti git accounta deploy etdikdən sonra servis avtomatik docker containerlə qalxacaq 
+
+Postman ilə yoxlamaq üçün payday.postman_collection.json export olunmuş faylından istifadə edə bilərsiniz.
