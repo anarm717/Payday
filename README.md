@@ -7,6 +7,8 @@ Proyekt modullar şəklindədir. Hər modulda aşağıdakı microservislər vard
 4. portfolio-service
 5. stock-service
 
+Default olaraq h2 database istifadə olunur. Configurasiyaları dəyişib istənilən database istifadə edilə bilər.
+
 İlkin mərhələdə ldap-service ilə fayl-dan user məlumatlarını oxuyaraq ldap security təmin olunmuşdur.
 Vaxt azlığından ldap security bütün proyektə tətbiq edilməmişdir.
 
