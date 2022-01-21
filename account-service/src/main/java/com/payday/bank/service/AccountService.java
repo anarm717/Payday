@@ -126,16 +126,10 @@ public class AccountService {
 	public Integer updateAccount(Account accountRequest) {
 
 
-		logger.debug("AccountService.saveAccount:" + accountRequest.toString());
+		logger.debug("AccountService.updateAccount:" + accountRequest.toString());
 		// need to set some stuff that cannot be null!
-		if (accountRequest.getLogincount() == null) {
-			accountRequest.setLogincount(0);
-		}
-		if (accountRequest.getLogoutcount() == null) {
-			accountRequest.setLogoutcount(0);
-		}
-
-		accountRequest.setPassword(BcryptEncoder.endoce(accountRequest.getPassword()));
+	
+		
 		Account account = accounts.save(accountRequest);
 		logger.info("AccountService.saveAccount: account saved: " + account);
 		return account.getId();
