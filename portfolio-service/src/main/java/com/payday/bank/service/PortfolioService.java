@@ -190,6 +190,10 @@ public class PortfolioService {
         entity.setCompletionDate(new Date());
         entity.setUserName(order.getUserName());
         entity.setOrderId(order.getOrderId());
+        
+         ResponseEntity<Account> responseEntity = restTemplate.getForEntity("http://localhost:8080/account/?name=" + order.getUserName(),
+            Account.class);
+         entity.setEmail(responseEntity.getBody().getEmail());
     }
 
   public List<DumpDto> getReport(String userName){
