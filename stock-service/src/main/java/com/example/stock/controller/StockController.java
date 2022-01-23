@@ -96,6 +96,13 @@ public class StockController {
         Stock s = service.getStock(query);
         return ResponseEntity.ok(s);
     }
+     
+       @GetMapping
+    public ResponseEntity<?> getStock(){
+        List<Stock> s = service.getAllStock();
+        return ResponseEntity.ok(s);
+    }
+
 
 
 
