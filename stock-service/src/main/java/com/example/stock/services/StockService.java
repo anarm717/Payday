@@ -29,5 +29,9 @@ public class StockService {
     public Stock getStock(String symbol ){
         return  repository.findBySymbol(symbol);
     }
+    
+     public List<Stock> getAllStock(){
+        return  repository.findAll();
+    }
 
 }
