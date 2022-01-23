@@ -3,7 +3,7 @@ package com.payday.bank.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.annotation.sql.DataSourceDefinition;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +34,7 @@ public class Account implements Serializable {
     private String address;
 
 	@Column(name = "password", length = 250)
+	@NotNull
     private String password;
 
 	@Column(name = "userName", length = 250, unique = true)
@@ -41,9 +42,11 @@ public class Account implements Serializable {
     private String userName;
 
 	@Column(name = "email", length = 250)
+	@NotNull
     private String email;
 
 	@Column(name = "creditcard", length = 250)
+	@NotNull
     private String creditcard;
 
 	@Column(name = "fullname", length = 250)
