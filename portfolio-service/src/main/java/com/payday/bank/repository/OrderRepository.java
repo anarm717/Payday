@@ -26,10 +26,10 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
 	"order by bb.type,bb.completiondate asc "*/
 
 
-	@Query(value = "select * from (SELECT user_name as userName, initial_quantity as initialquantity,symbol,completiondate,'buying' as type" +
+	@Query(value = "select * from (SELECT user_name as userName,price, initial_quantity as initialquantity,symbol,completiondate,'buying' as type" +
 			" FROM ORDERS where completiondate>=sysdate-60 and user_name = :userName " +
 			"union all " +
-			"select user_name as userName,quantity as initialquantity,symbol,completiondate,'selling' as type " +
+			"select user_name as userName,price,quantity as initialquantity,symbol,completiondate,'selling' as type " +
 			"from sells where completiondate>=sysdate-60 and user_name = :userName ) bb  " +
 			"order by bb.type,bb.completiondate asc ",nativeQuery = true)
 	 List<DumpDto> report(@Param("userName") String userName);
