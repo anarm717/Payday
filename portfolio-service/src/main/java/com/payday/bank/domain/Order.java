@@ -55,7 +55,6 @@ public class Order {
 	private Integer quantity;
 
 	@Column(name = "initial_quantity")
-	@NotNull
 	private Integer initialQuantity;
 
 
