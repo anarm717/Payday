@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@EnableScheduling
 public class NotificationServiceApplication {
 
 	public static void main(String[] args) {
