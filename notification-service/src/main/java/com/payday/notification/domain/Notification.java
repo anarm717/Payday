@@ -25,6 +25,10 @@ public class Notification {
 	@Column(name = "userName")
 	@NotNull
 	private String userName;
+	
+	@Column(name = "email")
+	@NotNull
+	private String email;
 
 	@Column(name = "completiondate")
 	@Temporal(TemporalType.TIMESTAMP)
