@@ -88,9 +88,9 @@ public class PortfolioController {
     }
 
 
-    @GetMapping(value = "/report")
-    public ResponseEntity<?> getReport() {
-        return ResponseEntity.ok(service.getReport());
+    @GetMapping(value = "/report/{userName}")
+    public ResponseEntity<?> getReport(@PathVariable("userName") final String userName) {
+        return ResponseEntity.ok(service.getReport(userName));
     }
 
 
