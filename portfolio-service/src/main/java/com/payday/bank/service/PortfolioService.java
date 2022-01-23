@@ -156,7 +156,7 @@ public class PortfolioService {
                 }
                 int quantity = currentOrder.getQuantity() - order.getQuantity();
                 System.out.println("quantity="+quantity);
-                if(quantity<=0){
+                if(quantity<0){
                     throw new NotEnoughQuantityException(Reason.NOT_ENOUGH_QUANTITY.getValue());
                 }
                 currentOrder.setQuantity(quantity);
