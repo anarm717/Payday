@@ -1,5 +1,6 @@
 package com.payday.bank.domain;
 
+import lombok.Data;
 import java.math.BigDecimal;
 
 /**
