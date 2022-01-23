@@ -17,8 +17,22 @@ public class NotificationService {
     private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
     @Autowired
     private NotificationRepository repository;
-    public Integer save(Notification entity){
+
+    public Integer save(Notification entity) {
+        entity.setSendStatus(0);
         repository.save(entity);
         return entity.getId();
     }
+
+    public List<Notification> findBySendStatus(int sendStatus) {
+        List<Notification> notifications = repository.findBySendStatus(sendStatus);
+        return notifications;
+    }
+
+    public Integer update(Notification entity) {
+        repository.save(entity);
+        return entity.getId();
+    }
+
+
 }
