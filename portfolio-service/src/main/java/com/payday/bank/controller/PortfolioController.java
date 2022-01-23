@@ -1,8 +1,10 @@
 package com.payday.bank.controller;
 
 
+import com.payday.bank.domain.DumpDto;
 import com.payday.bank.domain.Order;
 import com.payday.bank.domain.Portfolio;
+import com.payday.bank.domain.Report;
 import com.payday.bank.service.PortfolioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 
 /**
  * @author anar
@@ -90,7 +96,31 @@ public class PortfolioController {
 
     @GetMapping(value = "/report/{userName}")
     public ResponseEntity<?> getReport(@PathVariable("userName") final String userName) {
-        return ResponseEntity.ok(service.getReport(userName));
+
+        Report report = new Report();
+        List<DumpDto> dtoList = service.getReport(userName);
+
+        report.setDtos(dtoList);
+
+        final BigDecimal[] buying = {BigDecimal.ZERO};
+        final Integer[] buyingCount = {0};
+        final BigDecimal[] selling = {BigDecimal.ZERO};
+        final Integer[] sellingCount = {0};
+        dtoList.forEach(dto -> {
+
+            if (dto.getType().equals("selling")) {
+                sellingCount[0]++;
+                selling[0] = selling[0].add(dto.getPrice());
+                report.setSellingVolatility(selling[0].divide(BigDecimal.valueOf(sellingCount[0]),2, RoundingMode.HALF_UP));
+            } else if (dto.getType().equals("buying")) {
+                buyingCount[0] ++;
+                buying[0] = buying[0].add(dto.getPrice());
+                report.setBuyingVolatility(buying[0].divide(BigDecimal.valueOf(buyingCount[0]),2, RoundingMode.HALF_UP));
+            }
+        }
+        );
+
+        return ResponseEntity.ok(report);
     }
 
 
