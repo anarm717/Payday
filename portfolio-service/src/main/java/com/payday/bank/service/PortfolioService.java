@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -68,9 +69,9 @@ public class PortfolioService {
             
             Integer change = holding.getCurrentValue().subtract(holding.getPurchaseValue()).intValue();
             if (change > 0) {
-                holding.setChangePercent(holding.getCurrentValue().divide(holding.getPurchaseValue()).multiply(new BigDecimal(100)).subtract(new BigDecimal(100)));
+                holding.setChangePercent(holding.getCurrentValue().divide(holding.getPurchaseValue(),2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).subtract(new BigDecimal(100)));
             } else {
-                holding.setChangePercent(holding.getCurrentValue().divide(holding.getPurchaseValue()).multiply(new BigDecimal(100)).subtract(new BigDecimal(100)));
+                holding.setChangePercent(holding.getCurrentValue().divide(holding.getPurchaseValue(),2, RoundingMode.HALF_UP).multiply(new BigDecimal(100)).subtract(new BigDecimal(100)));
             }
             
             folio.getHoldings().put(order.getSymbol(), holding);
