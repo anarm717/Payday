@@ -182,9 +182,9 @@ public class PortfolioService {
         entity.setOrderId(order.getOrderId());
     }
 
-    public List<DumpDto> getReport(){
+  public List<DumpDto> getReport(String userName){
 
-        return repository.report();
+        return repository.report(userName);
 
     }
 
