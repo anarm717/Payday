@@ -24,6 +24,7 @@ Vaxt azlığından ldap security bütün proyektə tətbiq edilməmişdir.
 	"creationdate":"",
     "balance":
 }
+
 2./account/{id} get metoddur
 3./account/?name=   get metoddur
 4./accounts/{userName}/decreaseBalance/{amount}  get metoddur
@@ -43,6 +44,7 @@ Burada əlavə olaraq metodların request parametrlərinə validasiyalarda yazı
      "email":"",
      "orderId":      
  }
+ 
 Notification-service  transaction-lari bazaya vuraraq userlərə gedəcək emailləri bazada saxlanilir. Eyni zamanda bu servisdə 5 saniyədən bir işləyən scheduled ilə payday.bank.email@gmail.com maili ilə bazaya düşmüş transactionlara uyğun maillərə göndərilir və göndərilmiş maillərin bazada sendStatus-u dəyişdirilir.
 Bu servis digər servislərdə lazım olan yerlərdə çağrılır.
 
@@ -50,8 +52,10 @@ Bu servis digər servislərdə lazım olan yerlərdə çağrılır.
 -----stock-service olan metodlar:-----
 1./stocks/?query= get metoddur
 1./stocks/all get metoddur
+
 Stock-service  3 fərqli market üçün stockların qiymətini, ən son dəyişimini, dəyişim faizini almaq olar. All metodu ile hal-hazırda ala bildiyiniz stockları görmək mümkündür.
 Burada  real stocklar üçün yahoo kimi servislərdə problem olduğu üçün ,  bazadan stocklar götürülür və arxada bir timer işləyir və daim sanki qiymətlər artıb azalır.
+
 
 
 -----portfolio-service olan metodlar:-----
@@ -67,6 +71,7 @@ Burada  real stocklar üçün yahoo kimi servislərdə problem olduğu üçün ,
     "quantity":
 }
 3. /report/{userName} get metod
+
 Portfolio-service ilə account sahibləri stockları alıb sata bilirlər. Burada Alma və satma işi yerinə yetirilərkən accountun balansı yoxlanılır. 
 Lazımi artım və azalmalar orada da nəzərə alınır. ALınmamış stockun satılması və ya aldığından artıq satmaq mümkün deyildir.
 burada user adına görə hal hazırda əlində tutduğu stocklara baxmaq mümkündür. Bu siyahıda stockun hazırdakı qiyməti də nəzərə alınmışdır.
