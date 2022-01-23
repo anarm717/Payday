@@ -56,7 +56,7 @@ public class PortfolioController {
      */
     @RequestMapping(value = "/portfolio/{userName}", method = RequestMethod.POST)
     public ResponseEntity<?> addOrder(@PathVariable("userName") final String userName,
-                                      @RequestBody final Order order, UriComponentsBuilder builder) {
+                                     @Valid @RequestBody final Order order, UriComponentsBuilder builder) {
         logger.debug("Adding Order: " + order);
 
         //TODO: can do a test to ensure userName == order.getUserName();
