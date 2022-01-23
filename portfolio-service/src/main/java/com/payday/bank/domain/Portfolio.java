@@ -16,6 +16,7 @@ import java.util.Map;
 public class Portfolio {
 
 	private String userName;
+	private BigDecimal balance;
 	private BigDecimal currentTotalValue = BigDecimal.ZERO;
 	private BigDecimal purchaseValue = BigDecimal.ZERO;
 	private Map<String, Holding> holdings = new HashMap<>();
@@ -26,6 +27,14 @@ public class Portfolio {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
 
