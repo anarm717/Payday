@@ -59,7 +59,7 @@ public class PortfolioService {
         orders.forEach(order -> {
             Holding holding = new Holding();
             holding.setSymbol(order.getSymbol());
-            ResponseEntity<Stock> responseEntity = restTemplate.getForEntity("http://localhost:8890/stocks/?query=" + order.getSymbol(),
+            ResponseEntity<Stock> responseEntity = restTemplate.getForEntity("http://localhost:8083/stocks/?query=" + order.getSymbol(),
                     Stock.class);
             Stock quote = responseEntity.getBody();
             holding.setId(order.getOrderId());
