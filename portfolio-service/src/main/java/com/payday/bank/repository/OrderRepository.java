@@ -5,6 +5,7 @@ import com.payday.bank.domain.DumpDto;
 import com.payday.bank.domain.Order;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 /**
