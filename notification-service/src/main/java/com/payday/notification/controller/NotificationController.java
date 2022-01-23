@@ -2,6 +2,7 @@ package com.payday.notification.controller;
 
 
 import com.payday.notification.domain.Notification;
+import com.payday.notification.service.EmailService;
 import com.payday.notification.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.*;
 
 /**
  *
@@ -26,6 +32,27 @@ public class NotificationController {
 	 */
 	@Autowired
 	private NotificationService service;
+	
+	@Autowired
+       private EmailService emailService;
+	
+	 @Scheduled(fixedRate = 5000)
+    public void operation() {
+		System.out.println("1");
+        List<Notification> notifications = service.findBySendStatus(0);
+        notifications.forEach(notification -> {
+			try {
+				emailService.sendEmail(notification.getEmail(),notification.getMessage());
+				notification.setSendStatus(1);
+                service.update(notification);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		});
+    }
 
 
 	@PostMapping(value = "/notification")
