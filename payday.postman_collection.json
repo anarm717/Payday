@@ -144,11 +144,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8890/stocks/?query=EU",
+							"raw": "localhost:8083/stocks/?query=EU",
 							"host": [
 								"localhost"
 							],
-							"port": "8890",
+							"port": "8083",
 							"path": [
 								"stocks",
 								""
@@ -169,20 +169,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8890/stocks/?query=EU",
+							"raw": "localhost:8083/stocks/all",
 							"host": [
 								"localhost"
 							],
-							"port": "8890",
+							"port": "8083",
 							"path": [
 								"stocks",
-								""
-							],
-							"query": [
-								{
-									"key": "query",
-									"value": "EU"
-								}
+								"all"
 							]
 						}
 					},
@@ -222,7 +216,7 @@
 					"response": []
 				},
 				{
-					"name": "portfolio statistik",
+					"name": "portfolio holdings",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -253,7 +247,7 @@
 							"port": "8081",
 							"path": [
 								"report",
-								"anar1"
+								"anar"
 							]
 						}
 					},
@@ -271,7 +265,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n     \"message\":\"Transaction successfull\",\r\n     \"userName\":\"anar\",\r\n     \"orderId\":1\r\n             \r\n }",
+							"raw": " {\r\n     \"message\":\"Transaction successfull\",\r\n     \"userName\":\"anar\",\r\n     \"orderId\":1,\r\n     \"email\":\"anarm717@gmail.com\"\r\n             \r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
