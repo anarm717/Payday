@@ -37,7 +37,7 @@ public class AccountController {
      * @param id The id of the user to retrieve the account for.
      * @return The account object if found.
      */
-    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/account/{id}")
     public ResponseEntity<Account> find(@PathVariable("id") final Integer id) {
 
         logger.info("AccountController.find: id=" + id);
@@ -48,7 +48,7 @@ public class AccountController {
     }
 
     // TODO: do we need this? need to change web service to use find() above.
-    @RequestMapping(value = "/account/", method = RequestMethod.GET)
+    @GetMapping(value = "/account/")
     public ResponseEntity<Account> findAccount(@RequestParam(value = "name") final String id) {
 
         logger.info("AccountController.findAccount: id=" + id);
@@ -94,7 +94,7 @@ public class AccountController {
      * @param amount   The amount to decrease the balance by.
      * @return The new balance of the account with HTTP OK.
      */
-    @RequestMapping(value = "/accounts/{userName}/decreaseBalance/{amount}", method = RequestMethod.GET)
+    @GetMapping(value = "/accounts/{userName}/decreaseBalance/{amount}")
     public ResponseEntity<Double> decreaseBalance(@PathVariable("userName") final String userName, @PathVariable("amount") final double amount) {
 
         logger.debug("AccountController.decreaseBalance: id='" + userName + "', amount='" + amount + "'");
