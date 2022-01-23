@@ -80,6 +80,14 @@ public class PortfolioService {
         });
         folio.refreshTotalValue();
         folio.setUserName(userName);
+        
+          try {
+            ResponseEntity<Account> responseEntity = restTemplate.getForEntity("http://localhost:8080/account/?name=" + userName,
+                    Account.class);
+            folio.setBalance(responseEntity.getBody().getBalance());
+        }catch (Exception e){
+            
+        }
         return folio;
     }
 
