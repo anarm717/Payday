@@ -38,7 +38,7 @@ public class PortfolioController {
      * @param userName the account to retrieve the portfolio for.
      * @return The portfolio with HTTP OK.
      */
-    @RequestMapping(value = "/portfolio/{userName}", method = RequestMethod.GET)
+    @GetMapping(value = "/portfolio/{userName}")
     public ResponseEntity<Portfolio> getPortfolio(@PathVariable("userName") final String userName) {
         logger.debug("PortfolioController: Retrieving portfolio with user id:" + userName);
         Portfolio folio = service.getPortfolio(userName);
@@ -54,7 +54,7 @@ public class PortfolioController {
      * @param builder
      * @return The order with HTTP CREATED or BAD REQUEST if it couldn't save.
      */
-    @RequestMapping(value = "/portfolio/{userName}", method = RequestMethod.POST)
+     @PostMapping(value = "/portfolio/{userName}")
     public ResponseEntity<?> addOrder(@PathVariable("userName") final String userName,
                                      @Valid @RequestBody final Order order, UriComponentsBuilder builder) {
         logger.debug("Adding Order: " + order);
