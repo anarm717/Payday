@@ -17,8 +17,7 @@ accountun balansının artırılması və azaldılması yerinı yetirilir. Burad
 Məsələn eyni username təkrar vurula bilməməsi, axtararkən yoxdursa tapılmadı vəs kimi Customize olunmuş exceptionlar vardır.
 Burada əlavə olaraq metodların request parametrlərinə validasiyalarda yazıla bilər.
 
-Notification-service email notification-ları əvəz etmək üçün yazılmışdır. 
-Hal-hazırda email servisi xidməti olmadığı üçün email göndərməyi bazaya vuraraq userlərə gedəcək emailləri bazaya vurulur.
+Notification-service  transaction-lari bazaya vuraraq userlərə gedəcək emailləri bazada saxlanilir. Eyni zamanda bu servisdə 5 saniyədən bir işləyən scheduled ilə payday.bank.email@gmail.com maili ilə bazaya düşmüş transactionlara uyğun maillərə göndərilir və göndərilmiş maillərin bazada sendStatus-u dəyişdirilir.
 Bu servis digər servislərdə lazım olan yerlərdə çağrılır.
 
 Stock-service  3 fərqli market üçün stockların qiymətini, ən son dəyişimini, dəyişim faizini almaq olar.
