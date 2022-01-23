@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"address\":\"test\",\r\n   \"password\":\"test\",\r\n\t\"userName\":\"anar\",\r\n\t\"email\":\"anarm717@gmail.com\",\r\n    \"creditcard\":\"324343324234\",\r\n\t\"fullname\":\"vdefcedfsc\",\r\n    \"authtoken\":\"trgrhbg\",\r\n\t\"creationdate\":\"2013-10-21T13:28:06.419Z\",\r\n\t\"logoutcount\":0,\r\n    \"balance\":9,\r\n    \"logincount\":0\r\n}",
+							"raw": "{\r\n   \"address\":\"test\",\r\n   \"password\":\"test\",\r\n\t\"userName\":\"anar\",\r\n\t\"email\":\"anarm717@gmail.com\",\r\n    \"creditcard\":\"324343324234\",\r\n\t\"fullname\":\"vdefcedfsc\",\r\n\t\"creationdate\":\"2013-10-21T13:28:06.419Z\",\r\n\t\"logoutcount\":0,\r\n     \"balance\":9000,\r\n \"logincount\":0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -222,7 +222,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "portfolio statistik",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -241,10 +241,21 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "report",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/report/anar",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"report",
+								"anar1"
+							]
+						}
 					},
 					"response": []
 				}
