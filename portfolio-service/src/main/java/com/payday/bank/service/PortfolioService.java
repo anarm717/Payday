@@ -64,6 +64,14 @@ public class PortfolioService {
             holding.setCurrentValue(quote.getLastPrice());
             holding.setQuantity(order.getQuantity());
             holding.setPurchaseValue(order.getPrice());
+            
+            Integer change = holding.getCurrentValue().subtract(holding.getPurchaseValue()).intValue();
+            if (change > 0) {
+                holding.setChangePercent(new BigDecimal(100).subtract(holding.getCurrentValue().divide(holding.getPurchaseValue()).multiply(new BigDecimal(100))));
+            } else {
+                holding.setChangePercent(new BigDecimal(100).subtract(holding.getCurrentValue().divide(holding.getPurchaseValue()).multiply(new BigDecimal(100))));
+            }
+            
             folio.getHoldings().put(order.getSymbol(), holding);
         });
         folio.refreshTotalValue();
