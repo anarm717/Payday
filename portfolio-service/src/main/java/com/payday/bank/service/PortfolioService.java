@@ -57,6 +57,7 @@ public class PortfolioService {
         System.out.println("orders=" + orders);
         Portfolio folio = new Portfolio();
         orders.forEach(order -> {
+            if(order.getQuantity()>0) {
             Holding holding = new Holding();
             holding.setSymbol(order.getSymbol());
             ResponseEntity<Stock> responseEntity = restTemplate.getForEntity("http://localhost:8083/stocks/?query=" + order.getSymbol(),
@@ -75,6 +76,7 @@ public class PortfolioService {
             }
             
             folio.getHoldings().put(order.getSymbol(), holding);
+            }
         });
         folio.refreshTotalValue();
         folio.setUserName(userName);
