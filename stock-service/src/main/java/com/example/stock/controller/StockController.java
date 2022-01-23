@@ -97,8 +97,8 @@ public class StockController {
         return ResponseEntity.ok(s);
     }
      
-       @GetMapping
-    public ResponseEntity<?> getStock(){
+       @GetMapping("/all")
+    public ResponseEntity<?> getAllStock(){
         List<Stock> s = service.getAllStock();
         return ResponseEntity.ok(s);
     }
