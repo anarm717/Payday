@@ -26,7 +26,7 @@ Burada  real stocklar üçün yahoo kimi servislərdə problem olduğu üçün ,
 Portfolio-service ilə account sahibləri stockları alıb sata bilirlər. Burada Alma və satma işi yerinə yetirilərkən accountun balansı yoxlanılır. 
 Lazımi artım və azalmalar orada da nəzərə alınır. ALınmamış stockun satılması və ya aldığından artıq satmaq mümkün deyildir.
 burada user adına görə hal hazırda əlində tutduğu stocklara baxmaq mümkündür. Bu siyahıda stockun hazırdakı qiyməti də nəzərə alınmışdır.
-Eyni zamanda userName görə son 2 ayın alma və satma əməliyyatlarının  hesabatına da baxmaq olur. Burada satış və alış üçün volitality-ni də hesablanır.
+Eyni zamanda userName görə son 2 ayın alma və satma əməliyyatlarının  hesabatına da baxmaq olur. Burada satış və alış üçün volatility-ni də hesablanır.
 
 Nümunə üçün account-service dockerize edilib və swagger əlavə edilib. http://localhost:8080/swagger-ui.html#/ swagger url-dir. Bütün servislərə eynisini tətbiq edə bilərik. Dockerize bir neçə variantla edə bilərdim. Build olunmuş jar versiyanı containerə atıb elə də edə bilərdim (nümunə üçün bu variantı da Dockerfile2 əlavə etdim) ancaq mən fərqli variantla etdim ki, jar build etməmiş də dockerize olacaq.
 Həmçinin sadə .gitlab-ci.yml faylında CI/CD əlavə etdim proyekti git accounta deploy etdikdən sonra servis avtomatik docker containerlə qalxacaq 
