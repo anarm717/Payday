@@ -54,7 +54,6 @@ public class Account implements Serializable {
 
 
 	@Column(name = "logoutcount")
-	@NotNull
     private Integer logoutcount;
 
 	@Column(name = "balance", precision = 14, scale = 2, nullable=false)
@@ -63,7 +62,6 @@ public class Account implements Serializable {
 
 
 	@Column(name = "logincount")
-	@NotNull
     private Integer logincount;
 
 
