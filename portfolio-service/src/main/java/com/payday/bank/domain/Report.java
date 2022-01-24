@@ -18,6 +18,6 @@ public class Report {
 
 	private BigDecimal buyingVolatility;
 	private BigDecimal sellingVolatility;
-	private List<DumpDto> dtos;
+	private List<ReportItems> dtos;
 
 }
