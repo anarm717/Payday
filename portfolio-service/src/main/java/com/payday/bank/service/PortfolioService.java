@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author anar
@@ -54,7 +55,6 @@ public class PortfolioService {
 
         logger.debug("Getting portfolio for accountId: " + userName);
         List<Order> orders = repository.findByUserName(userName);
-        System.out.println("orders=" + orders);
         Portfolio folio = new Portfolio();
         orders.forEach(order -> {
             if(order.getQuantity()>0) {
@@ -117,7 +117,6 @@ public class PortfolioService {
                         order.getUserName(), amount
                 );
 
-                System.out.println("result==" + result);
 
                 if (result.getStatusCode() == HttpStatus.CREATED) {
                     logger.info(String
@@ -132,7 +131,6 @@ public class PortfolioService {
 
                     notificationEntityConvert(db, entity);
                     Integer id = restTemplate.postForObject("http://localhost:8082/notification/", entity, Integer.class);
-                    System.out.println("id=" + id);
 
                     return ResponseEntity.ok(db);
                 } else {
@@ -142,7 +140,6 @@ public class PortfolioService {
                     throw new NotEnoughException(Reason.NOT_ENOUGH_AMOUNT.getValue());
                 }
             } catch (Exception ex) {
-                System.out.println(ex);
                 throw new NotEnoughException(Reason.NOT_ENOUGH_AMOUNT.getValue());
             }
         } else {
@@ -157,27 +154,24 @@ public class PortfolioService {
                                 order.getUserName(), result.getBody()));
 
 
-                Order currentOrder = repository.findByOrderId(order.getOrderId());
+                Optional<Order> currentOrder = repository.findByOrderId(order.getOrderId());
 
-                System.out.println(currentOrder);
-
-                if (currentOrder==null){
+                if (!currentOrder.isPresent()){
                     throw new ItemNotFoundException(Reason.NOT_FOUND.getValue());
                 }
-                int quantity = currentOrder.getQuantity() - order.getQuantity();
-                System.out.println("quantity="+quantity);
+                int quantity = currentOrder.get().getQuantity() - order.getQuantity();
                 if(quantity<0){
                     throw new NotEnoughQuantityException(Reason.NOT_ENOUGH_QUANTITY.getValue());
                 }
-                currentOrder.setQuantity(quantity);
-                repository.save(currentOrder);
+                currentOrder.get().setQuantity(quantity);
+                repository.save(currentOrder.get());
 
 
                 Sell sell = new Sell();
-                sell.setOrderId(currentOrder.getOrderId());
-                sell.setUserName(currentOrder.getUserName());
+                sell.setOrderId(currentOrder.get().getOrderId());
+                sell.setUserName(currentOrder.get().getUserName());
                 sell.setQuantity(order.getQuantity());
-                sell.setBuyPrice(currentOrder.getPrice());
+                sell.setBuyPrice(currentOrder.get().getPrice());
                 sell.setSymbol(order.getSymbol());
                 sell.setPrice(order.getPrice());
                 sell.setCompletionDate(new Date());
@@ -185,7 +179,6 @@ public class PortfolioService {
 
                 notificationEntityConvert(order, entity);
                 Integer id = restTemplate.postForObject("http://localhost:8082/notification/", entity, Integer.class);
-                System.out.println("id=" + id);
                 return ResponseEntity.ok(order);
             } else {
                 // TODO: throw exception - negative value???
