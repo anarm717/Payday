@@ -62,7 +62,6 @@ public class PortfolioTests {
 
 		MvcResult result = mockMvc.perform(request).andReturn();
 
-		System.out.println(result.getResponse());
 		String expected = "OK";
 
 		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
