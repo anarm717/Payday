@@ -54,12 +54,9 @@ public class PortfolioTests {
 	@Test
 	public void getReport() throws Exception {
 
-//		Mockito.when(
-//				repository.report(Mockito.anyString(), Mockito.anyString())).thenReturn();
-
 	 RequestBuilder request = MockMvcRequestBuilders.get(
 				"/report1").accept(MediaType.APPLICATION_JSON);
-
+		
 		MvcResult result = mockMvc.perform(request).andReturn();
 
 		String expected = "OK";
