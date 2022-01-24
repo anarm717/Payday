@@ -49,9 +49,6 @@ public class StockController {
     @GetMapping("/operate")
     @Scheduled(fixedRate = 5000)
     public void operation(){
-
-        System.out.println(new Date());
-
         List<Stock> stocksList = service.allStock();
         Map<String, Stock > stocksMap = new HashMap<>();
         stocksList.forEach(it->{
@@ -60,33 +57,16 @@ public class StockController {
         Object[] crunchifyKeys = stocksMap.keySet().toArray();
         Object key = crunchifyKeys[new Random().nextInt(crunchifyKeys.length)];
         int v = new Random().nextInt(10)+1;
-
         if(v>=5) v= -v;
-
         Stock stock =stocksMap.get(key);
-
         BigDecimal val= stock.getLastPrice();
-
         stock.setLastPrice(new BigDecimal(v).add(val));
-        System.out.println("v"+v);
-        System.out.println("val"+val);
-        System.out.println("stock.getLastPrice().compareTo(new BigDecimal(0))="+stock.getLastPrice().compareTo(new BigDecimal(0)));
         if(stock.getLastPrice().compareTo(new BigDecimal(0))>0){
-
         stock.setChange(val);
         Float changePercent=null;
         BigDecimal firstPrice=   stock.getLastPrice().subtract(stock.getChange());
-
-        System.out.println("stock.getLastPrice()"+stock.getLastPrice());
-        System.out.println("stock.getChange()"+stock.getChange());
-        System.out.println("firstPrice"+firstPrice);
-
         changePercent= stock.getChange().divide(firstPrice, MathContext.DECIMAL128).multiply(new BigDecimal(100)).floatValue();
-
-        System.out.println("divide="+stock.getChange().divide(firstPrice, MathContext.DECIMAL128));
-        System.out.println("changePercent="+changePercent);
         stock.setChangePercent(changePercent);
-
         service.add(stock);}
     }
 
