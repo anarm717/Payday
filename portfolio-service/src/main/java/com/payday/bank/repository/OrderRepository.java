@@ -1,7 +1,7 @@
 package com.payday.bank.repository;
 
 
-import com.payday.bank.domain.DumpDto;
+import com.payday.bank.domain.ReportItems;
 import com.payday.bank.domain.Order;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -25,5 +25,5 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
 			"select user_name as userName,price,quantity as initialquantity,symbol,completiondate,'selling' as type " +
 			"from sells where completiondate>=sysdate-60 and user_name = :userName ) bb  " +
 			"order by bb.type,bb.completiondate asc ",nativeQuery = true)
-	 List<DumpDto> report(@Param("userName") String userName);
+	 List<ReportItems> report(@Param("userName") String userName);
 }
