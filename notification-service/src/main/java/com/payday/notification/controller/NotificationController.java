@@ -38,13 +38,14 @@ public class NotificationController {
 	
 	 @Scheduled(fixedRate = 5000)
     public void operation() {
-		System.out.println("1");
+		 logger.info("=========Scheduled started===========");
         List<Notification> notifications = service.findBySendStatus(0);
         notifications.forEach(notification -> {
 			try {
 				emailService.sendEmail(notification.getEmail(),notification.getMessage());
 				notification.setSendStatus(1);
                 service.update(notification);
+				logger.info("Mail sended"+notification.getEmail());
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
