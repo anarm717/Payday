@@ -76,19 +76,16 @@ public class AccountService {
 
 		logger.info("AccountService.findAccount: id=" + id);
 
-		Account account = accounts.findByUserName(id);
+		Optional<Account> account = accounts.findByUserName(id);
 
-
-		System.out.println("111 " +account);
-
-		if (account == null) {
+		if (!account.isPresent()) {
 			logger.warn("AccountService.findAccount: could not find account with id: " + id);
 			throw new ItemNotFoundException(Reason.NOT_FOUND.getValue());
 		}
 
 		logger.info(String.format("AccountService.findAccount - retrieved account with id: %s. Payload is: %s", id, account));
 
-		return account;
+		return account.get();
 	}
 
 
@@ -102,8 +99,8 @@ public class AccountService {
 	public Integer saveAccount(Account accountRequest) {
 
 
-		Account accountinDB = accounts.findByUserName(accountRequest.getUserName());
-		if (accountinDB != null) {
+		Optional<Account> accountinDB = accounts.findByUserName(accountRequest.getUserName());
+		if (!accountinDB.isPresent()) {
 			logger.warn("AccountService.findAccount: could find account with id: " + accountRequest.getUserName());
 			throw new NameAlreadyExistException(Reason.ALREADY_EXIST.getValue());
 		}
@@ -149,18 +146,18 @@ public class AccountService {
 	public Map<String, Object> login(String username, String password) {
 		logger.debug("login in user: " + username);
 		Map<String, Object> loginResponse = null;
-		Account account = accounts.findByUserNameAndPassword(username, BcryptEncoder.endoce(password));
-		if (account != null) {
+		Optional<Account>  account = accounts.findByUserNameAndPassword(username, BcryptEncoder.endoce(password));
+		if (!account.isPresent()) {
 			logger.debug("Found Account for user: " + username);
 //			account.setAuthtoken(UUID.randomUUID().toString());
-			account.setLogincount(account.getLogincount() + 1);
+			account.get().setLogincount(account.get().getLogincount() + 1);
 //			account.setLastlogin(new Date());
-			account = accounts.save(account); // persist new auth token and last
+			 accounts.save(account.get()); // persist new auth token and last
 												// login
 			loginResponse = new HashMap<String, Object>();
 
 //			loginResponse.put("authToken", account.getAuthtoken());
-			loginResponse.put("accountid", account.getId());
+			loginResponse.put("accountid", account.get().getId());
 			// loginResponse.put("password", account.getPasswd());
 
 			logger.info("AccountService.login success for " + username + " username::token=" + loginResponse.get("authToken"));
@@ -181,15 +178,14 @@ public class AccountService {
 	 */
 	public Account logout(String userName) {
 		logger.debug("AccountService.logout: Logging out account with userId: " + userName);
-		Account account = accounts.findByUserName(userName);
-		if (account != null) {
-//			account.setAuthtoken(null); // remove token
-			account.setLogoutcount(account.getLogoutcount() + 1);
-			accounts.save(account);
-			logger.info("AccountService.logout: Account logged out: " + account.getUserName());
+		Optional<Account>account = accounts.findByUserName(userName);
+		if (!account.isPresent()) {
+			account.get().setLogoutcount(account.get().getLogoutcount() + 1);
+			accounts.save(account.get());
+			logger.info("AccountService.logout: Account logged out: " + account.get().getUserName());
 		} else {
 			logger.warn("AccountService.logout: Could not find account to logout with userId: " + userName);
 		}
-		return account;
+		return account.get();
 	}
 }
