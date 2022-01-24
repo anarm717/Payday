@@ -68,14 +68,8 @@ public class AccountController {
     @PostMapping(value = "/account")
     public ResponseEntity<String> save(@Valid @RequestBody Account accountRequest, UriComponentsBuilder builder) {
 
-//        logger.debug("AccountController.save: userId=" + accountRequest.getUserName());
-//        Account accountResponse = this.service.findAccount(accountRequest.getUserName());
-//
-//        System.out.println(" accountResponse " +accountResponse);
-//
-//        if(accountResponse != null){
-//            return new ResponseEntity<String>("Data is already exists",HttpStatus.OK);
-//        }
+        logger.debug("AccountController.save: userId=" + accountRequest.getUserName());
+
         Integer accountProfileId = this.service.saveAccount(accountRequest);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setLocation(builder.path("/account/{id}").buildAndExpand(accountProfileId).toUri());
@@ -134,8 +128,6 @@ public class AccountController {
 
         Account accountResponse = this.service.findAccount(userName);
 
-        System.out.println(" accountResponse " +accountResponse );
-
         BigDecimal currentBalance = accountResponse.getBalance();
 
         logger.debug("AccountController.increaseBalance: current balance='" + currentBalance + "'.");
@@ -147,14 +139,11 @@ public class AccountController {
 
             accountResponse.setBalance(newBalance);
             this.service.updateAccount(accountResponse);
-//            if (-1 == newBalance.compareTo(BigDecimal.ZERO)) {
                 return new ResponseEntity<Double>(accountResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.OK);
-//            } else
-//                return new ResponseEntity<Double>(accountResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.CREATED);
+
 
         } else {
-            // amount can not be negative for increaseBalance, please use
-            // decreaseBalance
+
             return new ResponseEntity<Double>(accountResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.EXPECTATION_FAILED);
         }
 
