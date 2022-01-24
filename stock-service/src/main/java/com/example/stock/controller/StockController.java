@@ -36,7 +36,6 @@ public class StockController {
         stocks.put("AZ",new Stock( "AZERCEL","AZ",new BigDecimal("5.678"),null,null, new Date()));
         stocks.put("GB",new Stock( "YAHOO","GB",new BigDecimal("5.789"),null,null,new Date()));
 
-        System.out.println("service= " +service);
         service.add(stocks.get("EU"));
         service.add(stocks.get("AZ"));
         service.add(stocks.get("GB"));
